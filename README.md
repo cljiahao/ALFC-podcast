@@ -3,7 +3,7 @@
 </div>
 
 <div align="center">
-  :computer:
+ :musical_note: :computer: :headphones: :musical_note:
 </div>
 <div align="center">
   <strong>Extracting video from youtube, converting and uploading to Spotify</strong>
