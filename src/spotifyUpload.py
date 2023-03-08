@@ -33,6 +33,7 @@ class spotifyUpload():
             print("Published")
 
     def login(self,user,pwd):
+        
         self.driver.get("https://anchor.fm/login")
 
         username = self.driver.find_element(By.NAME,"email")
@@ -59,5 +60,3 @@ class spotifyUpload():
 
         xBut = self.wait.until(EC.element_to_be_clickable((By.XPATH,'/html/body/reach-portal/div[2]/div/div/div/div[1]/button')))
         xBut.click()
-
-# spotifyUpload(["145. ALFC Devotional - 21 Dec 2022.mp3"])
