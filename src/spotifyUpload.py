@@ -36,7 +36,7 @@ class spotifyUpload():
         
         self.driver.get("https://anchor.fm/login")
 
-        username = self.driver.find_element(By.NAME,"email")
+        username = self.wait.until(EC.presence_of_element_located((By.NAME,"email")))
         password = self.driver.find_element(By.NAME,"password")
 
         username.send_keys(user)
