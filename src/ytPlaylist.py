@@ -2,19 +2,19 @@ import json
 from pytube import Playlist
 
 class ytPlaylist():
-    def __init__(self,channel):
-        oldList = self.jsonRead()
-        self.extractList(channel,oldList)
+    def __init__(self,lang,channel):
+        oldList = self.jsonRead(lang)
+        self.extractList(lang,channel,oldList)
 
-    def jsonRead(self):
-        with open("src/json/playlist.json", "r") as f:
+    def jsonRead(self,lang):
+        with open(f"src/json/{lang}playlist.json", "r") as f:
             return json.load(f)
 
-    def jsonWrite(self,data):
-        with open("src/json/playlist.json", "w") as f:
+    def jsonWrite(self,lang,data):
+        with open(f"src/json/{lang}playlist.json", "w") as f:
             json.dump(data,f)
     
-    def extractList(self,channel,oldList):
+    def extractList(self,lang,channel,oldList):
         playlist = Playlist(channel)
-        self.jsonWrite(list(playlist))
+        self.jsonWrite(lang,list(playlist))
         self.newVideos = [x for x in playlist if x not in set(oldList)]

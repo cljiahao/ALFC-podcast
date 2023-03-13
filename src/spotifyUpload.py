@@ -10,13 +10,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 
 class spotifyUpload():
-    def __init__(self,fileNames):
+    def __init__(self,lang,fileNames):
 
         load_dotenv()
-        user = os.getenv("USER")
-        pwd = os.getenv("PASS")
+        user = os.getenv(f"{lang}USER")
+        pwd = os.getenv(f"{lang}PASS")
 
-        self.spotifyPath = os.path.join(os.getcwd(),"spotify")
+        self.spotifyPath = os.path.join(os.getcwd(),"spotify",lang)
 
         chrome_options = Options()
         chrome_options.add_argument("--window-size=1920,1080")

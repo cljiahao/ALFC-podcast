@@ -6,10 +6,10 @@ from yt_dlp import YoutubeDL
 from datetime import datetime
 
 class ytDownload():
-    def __init__(self,srcPath,playlist):
+    def __init__(self,srcPath,lang,playlist):
         self.process(srcPath,playlist)
         print("done")
-        self.renameFiles(srcPath)
+        self.renameFiles(srcPath,lang)
 
     def process(self,srcPath,playlist):
 
@@ -25,18 +25,18 @@ class ytDownload():
         with YoutubeDL(ydl_opts) as ydl:
             ydl.download(playlist)
 
-    def jsonRead(self):
-        with open("src/json/podcast.json", "r") as f:
+    def jsonRead(self,lang):
+        with open(f"src/json/{lang}Podcast.json", "r") as f:
             return json.load(f)
 
-    def jsonWrite(self,data):
-        with open("src/json/podcast.json", "w") as f:
+    def jsonWrite(self,lang,data):
+        with open(f"src/json/{lang}Podcast.json", "w") as f:
             json.dump(data,f)
 
-    def renameFiles(self,srcPath):
+    def renameFiles(self,srcPath,lang):
         newPod, arr, self.fileNames = [],[],[]
 
-        oldPod = self.jsonRead()
+        oldPod = self.jsonRead(lang)
 
         for fileName in os.listdir(srcPath):
             if fileName.split(".")[-1] == "mp3":
@@ -48,7 +48,7 @@ class ytDownload():
                     except ValueError: pass
         
         
-        if not self.jsonRead()[0][0]:
+        if not self.jsonRead(lang)[0][0]:
             sortDict = sorted(newPod) 
         else:
             oldPod = [[datetime.strptime(x[0], '%d %b %Y').date(),x[1],x[2]] for x in oldPod]
@@ -63,6 +63,6 @@ class ytDownload():
                 os.rename(os.path.join(srcPath,data[1]),os.path.join(srcPath,newName))
             arr.append([datetime.strftime(data[0],'%d %b %Y'),newName,True])
         
-        self.jsonWrite(arr)
+        self.jsonWrite(lang,arr)
 
             
