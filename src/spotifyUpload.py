@@ -22,8 +22,8 @@ class spotifyUpload():
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--remote-debugging-port=9222')
-        chrome_options.binary_location = '/usr/bin/google-chrome'
-        chrome_options.headless = True
+        # chrome_options.binary_location = '/usr/bin/google-chrome'
+        chrome_options.headless = False
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
         self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
@@ -34,7 +34,7 @@ class spotifyUpload():
 
     def login(self,user,pwd):
         
-        self.driver.get("https://anchor.fm/login")
+        self.driver.get("https://podcasters.spotify.com/pod/login")
 
         username = self.wait.until(EC.presence_of_element_located((By.NAME,"email")))
         password = self.driver.find_element(By.NAME,"password")
