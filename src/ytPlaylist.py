@@ -7,11 +7,11 @@ class ytPlaylist():
         self.extractList(lang,channel,oldList)
 
     def jsonRead(self,lang):
-        with open(f"src/json/{lang}playlist.json", "r") as f:
+        with open(f"src/json/{lang}Playlist.json", "r") as f:
             return json.load(f)
 
     def jsonWrite(self,lang,data):
-        with open(f"src/json/{lang}playlist.json", "w") as f:
+        with open(f"src/json/{lang}Playlist.json", "w") as f:
             json.dump(data,f)
     
     def extractList(self,lang,channel,oldList):
