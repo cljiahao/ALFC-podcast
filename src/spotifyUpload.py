@@ -25,7 +25,7 @@ class spotifyUpload():
         chrome_options.binary_location = '/usr/bin/google-chrome'
         chrome_options.headless = True
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
-        self.wait = WebDriverWait(self.driver, 100)
+        self.wait = WebDriverWait(self.driver, 300)
         self.login(user,pwd)
         for fileName in fileNames:
             self.uploadFiles(spotPath,fileName)
