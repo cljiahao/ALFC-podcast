@@ -16,6 +16,8 @@ class spotifyUpload():
         user = os.getenv(f"{lang}USER")
         pwd = os.getenv(f"{lang}PASS")
 
+        spotPath = os.path.join(os.getcwd(),srcPath)
+
         chrome_options = Options()
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
@@ -26,8 +28,8 @@ class spotifyUpload():
         self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
         for fileName in fileNames:
-            self.uploadFiles(srcPath,fileName)
-            os.remove(os.path.join(srcPath,fileName))
+            self.uploadFiles(spotPath,fileName)
+            os.remove(os.path.join(spotPath,fileName))
             print("Published")
 
     def login(self,user,pwd):
@@ -41,10 +43,10 @@ class spotifyUpload():
         password.send_keys(pwd)
         username.submit()        # Submit Login
 
-    def uploadFiles(self,srcPath,fileName):
+    def uploadFiles(self,spotPath,fileName):
         
         uploadepisode = self.wait.until(EC.presence_of_element_located((By.XPATH,'//input[@type="file"]')))
-        uploadepisode.send_keys(os.path.join(srcPath,fileName))
+        uploadepisode.send_keys(os.path.join(spotPath,fileName))
 
         publish = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-content"]/div/form/div[1]/div[2]/button[2]')))
 
