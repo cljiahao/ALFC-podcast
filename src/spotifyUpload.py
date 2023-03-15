@@ -10,13 +10,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 
 class spotifyUpload():
-    def __init__(self,lang,fileNames):
+    def __init__(self,lang,srcPath,fileNames):
 
         load_dotenv()
         user = os.getenv(f"{lang}USER")
         pwd = os.getenv(f"{lang}PASS")
-
-        self.spotifyPath = os.path.join(os.getcwd(),"spotify",lang)
 
         chrome_options = Options()
         chrome_options.add_argument("--window-size=1920,1080")
@@ -28,8 +26,8 @@ class spotifyUpload():
         self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
         for fileName in fileNames:
-            self.uploadFiles(fileName)
-            os.remove(os.path.join(self.spotifyPath,fileName))
+            self.uploadFiles(srcPath,fileName)
+            os.remove(os.path.join(srcPath,fileName))
             print("Published")
 
     def login(self,user,pwd):
@@ -43,10 +41,10 @@ class spotifyUpload():
         password.send_keys(pwd)
         username.submit()        # Submit Login
 
-    def uploadFiles(self,fileName):
+    def uploadFiles(self,srcPath,fileName):
         
         uploadepisode = self.wait.until(EC.presence_of_element_located((By.XPATH,'//input[@type="file"]')))
-        uploadepisode.send_keys(os.path.join(self.spotifyPath,fileName))
+        uploadepisode.send_keys(os.path.join(srcPath,fileName))
 
         publish = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-content"]/div/form/div[1]/div[2]/button[2]')))
 

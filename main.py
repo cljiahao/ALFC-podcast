@@ -12,4 +12,4 @@ if __name__ == "__main__":
         srcPath = f"spotify/{lang}"
         playlist = ytPlaylist(lang,url).newVideos
         fileNames = ytDownload(srcPath,lang,playlist).fileNames
-        if len(fileNames) > 0: spotifyUpload(lang,fileNames)
+        if len(fileNames) > 0: spotifyUpload(lang,srcPath,fileNames)
