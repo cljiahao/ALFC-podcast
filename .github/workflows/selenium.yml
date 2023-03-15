@@ -5,8 +5,10 @@ on:
     - cron: "0 0 * * 3"
 
 env:
-  USER: ${{ secrets.USER }}
-  PASS: ${{ secrets.PASS }}
+  ChiUSER: ${{ secrets.CHIUSER }}
+  ChiPASS: ${{ secrets.CHIPASS }}
+  EngUSER: ${{ secrets.ENGUSER }}
+  EngPASS: ${{ secrets.ENGPASS }}
 
 jobs:
   build:
