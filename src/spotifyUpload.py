@@ -22,8 +22,8 @@ class spotifyUpload():
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--remote-debugging-port=9222')
-        chrome_options.binary_location = '/usr/bin/google-chrome'
-        chrome_options.headless = True
+        # chrome_options.binary_location = '/usr/bin/google-chrome'
+        chrome_options.headless = False
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
         self.wait = WebDriverWait(self.driver, 300)
         self.login(user,pwd)
@@ -53,7 +53,7 @@ class spotifyUpload():
         title = self.driver.find_element(By.ID,"title")
         title.send_keys(fileName[:-4])
  
-        textbox = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div/form/div[4]/div[2]/div[2]/div/div/div[2]/div/div[2]/div')
+        textbox = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div/form/div[4]/div[2]/div/div[1]/div[2]')
         textbox.send_keys("Christian weekly devotionals from Abundant Life Family Church, Singapore")
 
         publish.click()
