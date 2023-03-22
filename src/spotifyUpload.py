@@ -16,7 +16,7 @@ class spotifyUpload():
         user = os.getenv(f"{lang}USER")
         pwd = os.getenv(f"{lang}PASS")
 
-        spotPath = os.path.join(os.getcwd(),srcPath)
+        spotPath = os.path.join(os.getcwd(),srcPath,lang)
 
         chrome_options = Options()
         chrome_options.add_argument("--window-size=1920,1080")

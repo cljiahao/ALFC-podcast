@@ -7,6 +7,7 @@ from datetime import datetime
 
 class ytDownload():
     def __init__(self,srcPath,lang,playlist):
+        srcPath = srcPath+f"/{lang}"
         self.process(srcPath,playlist)
         print("done")
         self.renameFiles(srcPath,lang)

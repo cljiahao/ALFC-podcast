@@ -1,3 +1,5 @@
+import os
+
 from src.ytPlaylist import ytPlaylist
 from src.ytDownload import ytDownload
 from src.spotifyUpload import spotifyUpload
@@ -9,7 +11,7 @@ channelURLs = {
 
 if __name__ == "__main__":
     for lang,url in channelURLs.items():
-        srcPath = f"spotify/{lang}"
+        srcPath = "spotify"
         playlist = ytPlaylist(lang,url).newVideos
         fileNames = ytDownload(srcPath,lang,playlist).fileNames
         if len(fileNames) > 0: spotifyUpload(lang,srcPath,fileNames)
