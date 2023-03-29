@@ -30,7 +30,7 @@ class spotifyUpload():
         for fileName in fileNames:
             self.uploadFiles(spotPath,fileName)
             os.remove(os.path.join(spotPath,fileName))
-            print("Published")
+            print(f"{fileName} Published")
 
     def login(self,user,pwd):
         
