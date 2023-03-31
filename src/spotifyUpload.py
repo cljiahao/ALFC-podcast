@@ -22,10 +22,10 @@ class spotifyUpload():
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--remote-debugging-port=9222')
-        chrome_options.binary_location = '/usr/bin/google-chrome'
+        # chrome_options.binary_location = '/usr/bin/google-chrome'
         chrome_options.headless = True
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=chrome_options)
-        self.wait = WebDriverWait(self.driver, 300)
+        self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
         for fileName in fileNames:
             self.uploadFiles(spotPath,fileName)
@@ -43,10 +43,18 @@ class spotifyUpload():
         password.send_keys(pwd)
         username.submit()        # Submit Login
 
-    def uploadFiles(self,spotPath,fileName):
-        
-        uploadepisode = self.wait.until(EC.presence_of_element_located((By.XPATH,'//input[@type="file"]')))
-        uploadepisode.send_keys(os.path.join(spotPath,fileName))
+    def uploadFiles(self,spotPath,fileName,refresh=True):
+        try:
+            uploadepisode = self.wait.until(EC.presence_of_element_located((By.XPATH,'//input[@type="file"]')))
+            uploadepisode.send_keys(os.path.join(spotPath,fileName))
+        except: 
+            if refresh:
+                print("Refreshed Browser")
+                self.driver.refresh()
+                self.uploadFiles(spotPath,fileName,False)
+            else: 
+                self.driver.save_screenshot("image.png")
+                raise TimeoutError('Browser not responsive, check screenshot.')
 
         publish = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-content"]/div/form/div[1]/div[2]/button[2]')))
 
