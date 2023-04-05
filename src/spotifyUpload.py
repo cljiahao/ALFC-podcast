@@ -64,7 +64,7 @@ class spotifyUpload():
         textbox = self.driver.find_element(By.XPATH,'//div[@name="description"]')
         textbox.send_keys("Christian weekly devotionals from Abundant Life Family Church, Singapore")
 
-        publish.click()
+        self.driver.execute_script("arguments[0].click();", publish)
 
         xBut = self.wait.until(EC.element_to_be_clickable((By.XPATH,'/html/body/reach-portal/div[2]/div/div/div/div[1]/button')))
         xBut.click()
