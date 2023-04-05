@@ -61,7 +61,7 @@ class spotifyUpload():
         title = self.driver.find_element(By.ID,"title")
         title.send_keys(fileName[:-4])
  
-        textbox = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div/form/div[4]/div[2]/div/div[1]/div[2]')
+        textbox = self.driver.find_element(By.NAME,'description')
         textbox.send_keys("Christian weekly devotionals from Abundant Life Family Church, Singapore")
 
         publish.click()
