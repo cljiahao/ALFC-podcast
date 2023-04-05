@@ -1,5 +1,3 @@
-import os
-
 from src.ytPlaylist import ytPlaylist
 from src.ytDownload import ytDownload
 from src.spotifyUpload import spotifyUpload
