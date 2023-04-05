@@ -53,8 +53,8 @@ class spotifyUpload():
                 self.driver.refresh()
                 self.uploadFiles(spotPath,fileName,False)
             else: 
-                self.driver.save_screenshot("image.png")
-                raise TimeoutError('Browser not responsive, check screenshot.')
+                # self.driver.save_screenshot("image.png")
+                raise TimeoutError('Browser not responsive.')
 
         publish = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-content"]/div/form/div[1]/div[2]/button[2]')))
 

@@ -3,7 +3,7 @@ from src.ytDownload import ytDownload
 from src.spotifyUpload import spotifyUpload
 
 channelURLs = {
-    "Eng":"https://www.youtube.com/playlist?list=PLZ1GiYqZoiH7QyULF8B7Wm5jeveptXaQG",
+    # "Eng":"https://www.youtube.com/playlist?list=PLZ1GiYqZoiH7QyULF8B7Wm5jeveptXaQG",
     "Chi":"https://www.youtube.com/playlist?list=PLZ1GiYqZoiH7V3xNi_DpCC0yXNbWPPvAK"
     }
 
