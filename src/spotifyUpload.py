@@ -34,7 +34,7 @@ class spotifyUpload():
 
     def login(self,user,pwd):
         
-        self.driver.get("https://podcasters.spotify.com/pod/login")
+        self.driver.get("https://podcasters.spotify.com/pod/dashboard/episode/wizard")
 
         username = self.wait.until(EC.presence_of_element_located((By.NAME,"email")))
         password = self.driver.find_element(By.NAME,"password")
@@ -56,15 +56,23 @@ class spotifyUpload():
                 # self.driver.save_screenshot("image.png")
                 raise TimeoutError('Browser not responsive.')
 
-        publish = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="app-content"]/div/form/div[1]/div[2]/button[2]')))
+        publish = self.wait.until(EC.text_to_be_present_in_element((By.XPATH, '//*[@id="app-content"]/div[2]/div/footer/div/div[3]/div/span'),'Preview ready!'))
 
-        title = self.driver.find_element(By.ID,"title")
+        title = self.driver.find_element(By.NAME,"title")
         title.send_keys(fileName[:-4])
  
-        textbox = self.driver.find_element(By.XPATH,'//div[@name="description"]')
+        textbox = self.driver.find_element(By.NAME,'description')
         textbox.send_keys("Christian weekly devotionals from Abundant Life Family Church, Singapore")
 
-        self.driver.execute_script("arguments[0].click();", publish)
+        publishRadio = self.driver.find_element(By.ID,'publish-date-now')
+        self.driver.execute_script("arguments[0].checked = true;", publishRadio)
 
-        xBut = self.wait.until(EC.element_to_be_clickable((By.XPATH,'/html/body/reach-portal/div[2]/div/div/div/div[1]/button')))
-        xBut.click()
+        explicitRadio = self.driver.find_element(By.ID,'no-explicit-content')
+        self.driver.execute_script("arguments[0].checked = true;", explicitRadio)
+
+        nextButton = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div[2]/div/footer/div/div[4]/button')
+        self.driver.execute_script("arguments[0].click();", nextButton)
+        self.driver.execute_script("arguments[0].click();", nextButton)
+        self.driver.execute_script("arguments[0].click();", nextButton)
+
+        self.driver.get("https://podcasters.spotify.com/pod/dashboard/episode/wizard")
