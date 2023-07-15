@@ -56,7 +56,7 @@ class spotifyUpload():
                 # self.driver.save_screenshot("image.png")
                 raise TimeoutError('Browser not responsive.')
 
-        publish = self.wait.until(EC.text_to_be_present_in_element((By.XPATH, '//*[@id="app-content"]/div[2]/div/footer/div/div[3]/div/span'),'Preview ready!'))
+        self.wait.until(EC.text_to_be_present_in_element((By.XPATH, '//*[@id="app-content"]/div/div/footer/div/div[3]/div/span'),'Preview ready!'))
 
         title = self.driver.find_element(By.NAME,"title")
         title.send_keys(fileName[:-4])
@@ -70,7 +70,7 @@ class spotifyUpload():
         explicitRadio = self.driver.find_element(By.ID,'no-explicit-content')
         self.driver.execute_script("arguments[0].checked = true;", explicitRadio)
 
-        nextButton = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div[2]/div/footer/div/div[4]/button')
+        nextButton = self.driver.find_element(By.XPATH,'//*[@id="app-content"]/div/div/footer/div/div[4]/button')
         self.driver.execute_script("arguments[0].click();", nextButton)
         self.driver.execute_script("arguments[0].click();", nextButton)
         self.driver.execute_script("arguments[0].click();", nextButton)
