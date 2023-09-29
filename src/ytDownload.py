@@ -9,7 +9,7 @@ class ytDownload():
     def __init__(self,srcPath,lang,playlist):
         srcPath = srcPath+f"/{lang}"
         self.process(srcPath,playlist)
-        print("done")
+        print("Done downloading")
         self.renameFiles(srcPath,lang)
 
     def process(self,srcPath,playlist):
