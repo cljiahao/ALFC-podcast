@@ -17,15 +17,13 @@ class spotifyUpload():
 
         spotPath = os.path.join(os.getcwd(),srcPath,lang)
 
-        service = Service()
-
         chrome_options = Options()
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--remote-debugging-port=9222')
-        chrome_options.binary_location = '/usr/bin/google-chrome'
-        chrome_options.headless = True
-        self.driver = webdriver.Chrome(service=service,options=chrome_options)
+        # chrome_options.binary_location = '/usr/bin/google-chrome'
+        chrome_options.headless = False
+        self.driver = webdriver.Chrome(options=chrome_options)
         self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
         for fileName in fileNames:
