@@ -21,8 +21,8 @@ class spotifyUpload():
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument('--remote-debugging-port=9222')
-        # chrome_options.binary_location = '/usr/bin/google-chrome'
-        chrome_options.headless = False
+        chrome_options.binary_location = '/usr/bin/google-chrome'
+        chrome_options.headless = True
         self.driver = webdriver.Chrome(options=chrome_options)
         self.wait = WebDriverWait(self.driver, 100)
         self.login(user,pwd)
