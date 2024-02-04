@@ -33,6 +33,12 @@ class spotifyUpload:
     def login(self, user, pwd):
         self.driver.get("https://podcasters.spotify.com/pod/dashboard/episode/wizard")
 
+        self.wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="app-content"]/div/div[2]/div[2]/button')
+            )
+        )
+
         self.driver.find_element(
             By.XPATH, '//*[@id="app-content"]/div/div[2]/div[2]/button'
         ).click()
